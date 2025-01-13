@@ -5,14 +5,18 @@ allprojects {
     }
 }
 
+// Đặt thư mục build cho rootProject
 rootProject.buildDir = "../build"
+
+// Đặt thư mục build cho các subprojects
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
+
+    // Đảm bảo rằng tất cả các dự án phụ phụ thuộc vào dự án chính
     project.evaluationDependsOn(":app")
 }
 
+// Nhiệm vụ clean để xóa thư mục build
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
